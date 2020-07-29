@@ -1,19 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <Space />
+        </div>
+        <div class="col-3">
+          <div>
+            <date-pick v-model="date"></date-pick>
+            <button class="btn btn-info" @click.prevent="getDate()">Get</button>
+          </div>
+        </div>
+        <div class="col-6">
+          <DateSpace />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Space from "./components/Space";
+import DatePick from "vue-date-pick";
+import "vue-date-pick/dist/vueDatePick.css";
+import DateSpace from "./components/DateSpace";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      date: "2019-01-01",
+    };
+  },
+  methods: {
+    getDate() {
+      console.log(this.date);
+      this.$store.dispatch("getMySpacePic", this.date);
+    },
+  },
   components: {
-    HelloWorld
-  }
-}
+    Space,
+    DatePick,
+    DateSpace,
+  },
+};
 </script>
 
 <style>
